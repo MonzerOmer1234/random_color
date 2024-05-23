@@ -42,7 +42,7 @@ export default function ProfileFinder() {
         <input
           type="text"
           value={username}
-          onChange={(event) => setUsername(event.target.value)}
+          onChange={(event) => setUsername(event.target.value.toLowerCase())}
           name="search-by-username"
           placeholder="Search Github Username..."
         />
