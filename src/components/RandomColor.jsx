@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import '../App.css'
 
 export const RandomColor = () => {
   const [typeOfColor, setTypeOfColor] = useState("hex");
@@ -8,7 +9,7 @@ export const RandomColor = () => {
     return Math.floor(Math.random() * length);
   }
 
-  function handleCreateRandomHexColor() {
+  const handleCreateRandomHexColor  = useCallback(()=> {
     const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
 
     let hexCode = "#";
@@ -17,21 +18,21 @@ export const RandomColor = () => {
     }
 
     setColor(hexCode);
-  }
-  function handleCreateRandomRgbColor() {
+  } ,  [])
+  const  handleCreateRandomRgbColor = useCallback(() => {
     const r = randomColorUtiltiy(256);
     const g = randomColorUtiltiy(256);
     const b = randomColorUtiltiy(256);
     setColor(`rgb(${r} , ${g} , ${b})`);
     setTypeOfColor("rgb");
-  }
+  } , [])
   useEffect(() => {
     if (typeOfColor === "hex") {
       handleCreateRandomHexColor();
     } else {
       handleCreateRandomRgbColor();
     }
-  }, [typeOfColor]);
+  }, [typeOfColor , handleCreateRandomHexColor , handleCreateRandomRgbColor]);
   return (
     <div
       style={{
@@ -58,7 +59,7 @@ export const RandomColor = () => {
           justifyContent: "center",
           alignItems: "center",
           color: "#fff",
-          fontSize: "60px",
+      
           marginTop: "200px",
         }}
       >
